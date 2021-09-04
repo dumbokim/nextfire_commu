@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-interface ListProps {
+interface WritingListProps {
   like?: number;
   title?: string;
   writer?: string;
 }
 
-export const List = ({ like, title, writer, ...props }: ListProps) => {
+export const WritingList = ({
+  like,
+  title,
+  writer,
+  ...props
+}: WritingListProps) => {
   return (
     <ListWrapper>
       <ListNum>{like}</ListNum>

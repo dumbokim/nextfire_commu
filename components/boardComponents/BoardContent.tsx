@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { List } from "./index";
+import { WritingList } from "./index";
 import { db } from "../../helpers/firebase";
 import { getDocs, collection } from "firebase/firestore";
 
@@ -18,7 +18,7 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
       querySnapshot.docs.map((doc) => {
         return {
           key: doc.id,
-          docId: doc.data().docId,
+          // docId: doc.data().docId,
           title: doc.data().title,
           like: doc.data().like,
         };
@@ -32,14 +32,14 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
 
   return (
     <BoardContentWrapper>
-      {items.map((item: any) => {
+      {items.map((item: any, num) => {
         return (
-          <List
-            key={item.key}
+          <WritingList
+            key={num}
             like={item.like}
             title={item.title}
-            writer={item.docId}
-          ></List>
+            // writer={item.docId}
+          ></WritingList>
         );
       })}
     </BoardContentWrapper>
