@@ -1,22 +1,14 @@
 import React from "react";
-import styled from "@emotion/styled";
+import { Board, PageWrapper } from "../../components/index";
 
-interface Props {}
+interface InfoPageProps {}
 
-const InfoPage = (props: Props) => {
+const InfoPage = (props: InfoPageProps) => {
   return (
-    <InfoPageWrapper>
-      <div>dfasdfs</div>
-      <div>정보 게시판이어요!</div>
-      <div>dfdf</div>
-    </InfoPageWrapper>
+    <PageWrapper>
+      <Board location="info" />
+    </PageWrapper>
   );
 };
-
-const InfoPageWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
 
 export default InfoPage;

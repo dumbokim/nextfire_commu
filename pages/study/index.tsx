@@ -1,14 +1,14 @@
 import React from "react";
 import { Board, PageWrapper } from "../../components/index";
 
-interface FreePageProps {}
+interface StudyPageProps {}
 
-const FreePage = (props: FreePageProps) => {
+const StudyPage = (props: StudyPageProps) => {
   return (
     <PageWrapper>
-      <Board location="free" />
+      <Board location="study" />
     </PageWrapper>
   );
 };
 
-export default FreePage;
+export default StudyPage;

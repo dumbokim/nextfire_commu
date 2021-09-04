@@ -3,8 +3,8 @@ import styled from "@emotion/styled";
 
 interface ListProps {
   listNum?: number;
-  title: string;
-  writer: string;
+  title?: string;
+  writer?: string;
 }
 
 export const List = ({ listNum, title, writer, ...props }: ListProps) => {
