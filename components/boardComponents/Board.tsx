@@ -35,7 +35,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
       view: 0,
     });
 
-    router.reload(true);
+    router.reload();
   };
 
   useEffect(() => {
