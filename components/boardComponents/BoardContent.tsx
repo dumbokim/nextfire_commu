@@ -16,7 +16,12 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
 
     setItems(
       querySnapshot.docs.map((doc) => {
-        return { docId: doc.data().docId, title: doc.data().title };
+        return {
+          key: doc.id,
+          docId: doc.data().docId,
+          title: doc.data().title,
+          like: doc.data().like,
+        };
       })
     );
   };
@@ -29,14 +34,12 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
     <BoardContentWrapper>
       {items.map((item: any) => {
         return (
-          <>
-            <List
-              key={item.docId}
-              listNum={0}
-              title={item.title}
-              writer={item.docId}
-            />
-          </>
+          <List
+            key={item.key}
+            like={item.like}
+            title={item.title}
+            writer={item.docId}
+          ></List>
         );
       })}
     </BoardContentWrapper>
@@ -45,8 +48,9 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
 
 const BoardContentWrapper = styled.div`
   width: 100%;
-  border: 1px solid gray;
+  border: 1px solid lightgray;
   border-radius: 1vh;
+  padding: 1rem 0;
 `;
 
 const Button = styled.button``;

@@ -16,11 +16,16 @@ export const Layout = ({ children, props }: LayoutProps) => {
     <LayoutWrapper>
       <Head>
         <title>commu~</title>
+        <link rel="icon" href="/commu_favicon1.png" />
       </Head>
       <Navbar>
-        <NavBtn href="/">
-          <IoMdSnow size="18" />
-        </NavBtn>
+        <Link href="/">
+          <a>
+            <HomeBtn>
+              <IoMdSnow size="1.5rem" />
+            </HomeBtn>
+          </a>
+        </Link>
         <NavBtn href="/free">자유</NavBtn>
         <NavBtn href="/info">정보</NavBtn>
         <NavBtn href="/study">스터디</NavBtn>
@@ -42,7 +47,24 @@ const Navbar = styled.div`
   padding: 0.5rem 0;
   margin: 0.5rem 0;
   justify-content: space-around;
+  align-items: center;
   border-bottom: 1px solid lightgray;
+`;
+
+const HomeBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 10vh;
+  border: 2px solid #84d6fa;
+  color: #84d6fa;
+
+  @media (max-width: 500px) {
+    height: 2rem;
+    width: 2rem;
+  }
 `;
 
 const ContentWrapper = styled.div`

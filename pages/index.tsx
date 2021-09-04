@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
-import { PageWrapper } from "../components";
+import { PageWrapper, Board } from "../components";
 
 const Home: NextPage = () => {
-  return <PageWrapper>HomePage!!</PageWrapper>;
+  return (
+    <PageWrapper>
+      <Board location="hot" />
+    </PageWrapper>
+  );
 };
 
 export default Home;

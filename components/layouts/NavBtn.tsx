@@ -29,6 +29,7 @@ const NavBtnWrapper = styled.div`
   background-color: #84d6fa;
   color: aliceblue;
   font-weight: bold;
+  font-size: 1rem;
 
   @media (max-width: 500px) {
     padding: 5px 12px;
