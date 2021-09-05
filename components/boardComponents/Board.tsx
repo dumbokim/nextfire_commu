@@ -11,7 +11,7 @@ interface BoardProps {
 
 export const Board = ({ location, ...props }: BoardProps) => {
   const [title, setTitle] = useState("");
-  const [query, setQuery] = useState(false);
+  const [openWrite, setOpenWrite] = useState(false);
 
   const [writingTitle, setWritingTitle] = useState("");
   const [writingContent, setWritingContent] = useState("");
@@ -21,6 +21,29 @@ export const Board = ({ location, ...props }: BoardProps) => {
 
   // 게시판 타이틀 정하는 함수
   const getTitle = () => {
+    switch (location) {
+      case "free":
+        setTitle("자유");
+        break;
+
+      case "info":
+        setTitle("정보");
+        break;
+
+      case "study":
+        setTitle("스터디");
+        break;
+
+      case "promotion":
+        setTitle("홍보");
+        break;
+
+      case "hot":
+        setTitle("온돌");
+        break;
+      // default:
+      //   break;
+    }
     if (location === "free") setTitle("자유");
     else if (location === "info") setTitle("정보");
     else if (location === "study") setTitle("스터디");
@@ -41,7 +64,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
   };
 
   const onClickCloseWriting = () => {
-    setQuery(false);
+    setOpenWrite(false);
   };
 
   useEffect(() => {
@@ -50,7 +73,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
 
   return (
     <BoardWrapper>
-      {query === false ? (
+      {openWrite === false ? (
         <>
           <BoardTitle>{title}마루</BoardTitle>
           <BoardContent location={location} />
@@ -58,7 +81,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
             <></>
           ) : (
             <WritingBtnWrapper>
-              <WritingBtn onClick={() => setQuery(true)}>글쓰기</WritingBtn>
+              <WritingBtn onClick={() => setOpenWrite(true)}>글쓰기</WritingBtn>
             </WritingBtnWrapper>
           )}
         </>

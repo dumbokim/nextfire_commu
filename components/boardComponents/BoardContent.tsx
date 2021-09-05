@@ -48,6 +48,7 @@ const BoardContentWrapper = styled.div`
   border: 1px solid lightgray;
   border-radius: 1vh;
   padding: 1rem 0;
+  background-color: #e6e6e6;
 `;
 
 const Button = styled.button``;

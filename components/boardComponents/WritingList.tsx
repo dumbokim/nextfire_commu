@@ -12,34 +12,34 @@ export const WritingList = ({ item, ...props }: WritingListProps) => {
     <ListWrapper>
       <ListContainer>
         <ListLike>
-          <IoMdSnow size="1.5rem" color="#84d6fa" />
+          <IoMdSnow size="1.2rem" color="#84d6fa" />
           {item.like}
         </ListLike>
         <Title>{item.title}</Title>
         <Writer>{item.writerDetail}</Writer>
       </ListContainer>
-      {<WritingContent item={item} />}
+      {/* {<WritingContent item={item} />} */}
     </ListWrapper>
   );
 };
 
 const ListWrapper = styled.div`
   width: 100%;
-
-  /* display: flex;
-  align-items: center; */
-
-  /* overflow-x: hidden; */
-  padding: 3px;
+  /* padding: 3px; */
+  background-color: white;
+  margin: 0.5rem 0;
 `;
 
 const ListContainer = styled.div`
   width: 100%;
-  height: 2.3rem;
+  height: 2.5rem;
   display: flex;
   align-items: center;
-  border: 1px solid lightgray;
-  border-radius: 1vh;
+  /* border: 1px solid lightgray; */
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+
+  /* border-radius: 1vh; */
 `;
 
 const ListLike = styled.div`
