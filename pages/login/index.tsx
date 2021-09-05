@@ -36,7 +36,7 @@ const LoginPage = (props: LoginPageProps) => {
       .catch(console.log);
   };
 
-  const onClickSignUp = (e) => {
+  const onClickSignUp = (e: any) => {
     if (upEmail === "" || upPwd === "" || univ === "" || major === "")
       return alert("가입 입력을 완료해주세요");
 
