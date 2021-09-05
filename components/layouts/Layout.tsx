@@ -39,6 +39,7 @@ export const Layout = ({ children, props }: LayoutProps) => {
 const LayoutWrapper = styled.div`
   width: 100%;
   height: 100%;
+  background-color: #e6e6e6;
 `;
 
 const Navbar = styled.div`
@@ -49,6 +50,7 @@ const Navbar = styled.div`
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid lightgray;
+  background-color: white;
 `;
 
 const HomeBtn = styled.div`

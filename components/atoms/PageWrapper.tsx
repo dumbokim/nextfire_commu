@@ -8,6 +8,7 @@ export const PageWrapper = styled.div`
   border-radius: 1vh;
   display: flex;
   flex-direction: column;
+  background-color: white;
 
   @media (max-width: 500px) {
     padding: 5px;

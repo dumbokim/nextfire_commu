@@ -106,6 +106,7 @@ const BoardWrapper = styled.div`
   padding: 2rem;
   border: 1px solid lightgray;
   border-radius: 1vh;
+  background-color: white;
 
   @media (max-width: 500px) {
     padding: 5px;
