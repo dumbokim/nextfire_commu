@@ -4,10 +4,17 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
 import styled from "@emotion/styled";
 import { PageWrapper } from "../../components";
 import { useRouter } from "next/router";
+import { setUserId } from "firebase/analytics";
 
 interface LoginPageProps {}
 
@@ -18,6 +25,7 @@ const LoginPage = (props: LoginPageProps) => {
   const [upPwd, setUpPwd] = useState("");
   const [univ, setUniv] = useState("");
   const [major, setMajor] = useState("");
+  // const [userId, setUserId] = useState("");
 
   const [signUpOpen, setSignUpOpen] = useState(false);
 
@@ -40,11 +48,16 @@ const LoginPage = (props: LoginPageProps) => {
     if (upEmail === "" || upPwd === "" || univ === "" || major === "")
       return alert("가입 입력을 완료해주세요");
 
+    let userId: string;
+
     createUserWithEmailAndPassword(auth, upEmail, upPwd)
-      .then(() => {
+      .then((user) => {
+        userId = user.user.uid;
+
         signInWithEmailAndPassword(auth, upEmail, upPwd)
           .then(() => {
-            authToDb(upEmail, univ, major);
+            console.log(userId);
+            authToDb(userId, upEmail, univ, major);
             router.back();
           })
           .catch(console.log);
@@ -52,8 +65,14 @@ const LoginPage = (props: LoginPageProps) => {
       .catch(console.log);
   };
 
-  const authToDb = async (email: string, univ: string, major: string) => {
-    await addDoc(collection(db, `users`), {
+  const authToDb = async (
+    uid: string,
+    email: string,
+    univ: string,
+    major: string
+  ) => {
+    await setDoc(doc(db, `users`, uid), {
+      uid: uid,
       email: email,
       univ: univ,
       major: major,

@@ -4,7 +4,15 @@ import { BoardContent, Writing } from "./index";
 import router, { useRouter } from "next/router";
 import Link from "next/link";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDoc,
+  where,
+  query,
+  doc,
+} from "firebase/firestore";
 
 interface BoardProps {
   location: string;
@@ -62,20 +70,38 @@ export const Board = ({ location, ...props }: BoardProps) => {
     });
   };
 
-  // 포스팅 창 띄우는 클릭 함수
+  // 글 포스팅하는 함수
   const onClickPosting = async () => {
-    await addDoc(collection(db, `${location}`), {
-      title: writingTitle,
-      content: writingContent,
-      like: 0,
-      view: 0,
-    });
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userId = user.uid;
 
-    router.reload();
+        const docRef = doc(db, "user", "");
+        const getUserData = await getDoc(docRef);
+
+        // getUserData.forEach(async (doc) => {
+        //   const detail = doc.data().writerDetail;
+
+        //   console.log(userId, detail);
+
+        // await addDoc(collection(db, `${location}`), {
+        //   title: writingTitle,
+        //   content: writingContent,
+        //   like: 0,
+        //   view: 0,
+
+        // });
+
+        // router.reload();
+        // });
+      }
+    });
   };
 
   const onClickCloseWriting = () => {
     setOpenWrite(false);
+    setWritingTitle("");
+    setWritingContent("");
   };
 
   useEffect(() => {
