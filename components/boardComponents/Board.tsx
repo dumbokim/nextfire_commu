@@ -63,7 +63,9 @@ export const Board = ({ location, ...props }: BoardProps) => {
   };
 
   // 글쓰기 클릭 함수
-  const onClickOpenWriting = () => {
+  const onClickOpenWriting = (e: any) => {
+    e.stopPropagation();
+
     onAuthStateChanged(auth, (user) => {
       if (user) setOpenWrite(true);
       else return alert("로그인을 해주세요!");

@@ -32,7 +32,7 @@ export const Layout = ({ children, props }: LayoutProps) => {
   };
 
   const logout = (e: any) => {
-    e.stopPropagation();
+    e.preventDefault();
 
     signOut(auth)
       .then(() => {
