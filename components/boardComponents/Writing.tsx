@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { useRouter } from "next/router";
+import { CloseBtn, CloseBtnWrapper } from "../index";
+import { IoMdArrowBack } from "react-icons/io";
 
 interface WritingProps {
   location?: any;
   setWritingTitle?: any;
   setWritingContent?: any;
   onClick?: any;
+  onClickCloseWriting?: any;
 }
 
 export const Writing = ({
@@ -13,11 +17,20 @@ export const Writing = ({
   setWritingContent,
   setWritingTitle,
   onClick,
+  onClickCloseWriting,
   ...props
 }: WritingProps) => {
+  const router = useRouter();
+
   return (
     <WritingWrapper>
+      <CloseBtnWrapper>
+        <CloseBtn onClick={onClickCloseWriting}>
+          <IoMdArrowBack size="1.5rem" />
+        </CloseBtn>
+      </CloseBtnWrapper>
       <BoardTitle>{location}마루</BoardTitle>
+
       <InputTitle
         placeholder="제목"
         onChange={(e) => setWritingTitle(e.target.value)}

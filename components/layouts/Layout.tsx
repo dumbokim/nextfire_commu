@@ -15,7 +15,7 @@ export const Layout = ({ children, props }: LayoutProps) => {
   return (
     <LayoutWrapper>
       <Head>
-        <title>commu~</title>
+        <title>대학생 커뮤니티</title>
         <link rel="icon" href="/commu_favicon1.png" />
       </Head>
       <Navbar>

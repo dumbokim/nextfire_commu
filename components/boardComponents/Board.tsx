@@ -19,6 +19,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
   const router = useRouter();
   const db = getFirestore();
 
+  // 게시판 타이틀 정하는 함수
   const getTitle = () => {
     if (location === "free") setTitle("자유");
     else if (location === "info") setTitle("정보");
@@ -27,6 +28,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
     else if (location === "hot") setTitle("온돌");
   };
 
+  // 포스팅 창 띄우는 클릭 함수
   const onClickPosting = async () => {
     await addDoc(collection(db, `${location}`), {
       title: writingTitle,
@@ -36,6 +38,10 @@ export const Board = ({ location, ...props }: BoardProps) => {
     });
 
     router.reload();
+  };
+
+  const onClickCloseWriting = () => {
+    setQuery(false);
   };
 
   useEffect(() => {
@@ -63,6 +69,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
             setWritingTitle={setWritingTitle}
             setWritingContent={setWritingContent}
             onClick={onClickPosting}
+            onClickCloseWriting={onClickCloseWriting}
           />
         </>
       )}

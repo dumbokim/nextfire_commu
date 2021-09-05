@@ -11,6 +11,7 @@ interface BoardContentProps {
 export const BoardContent = ({ location, ...props }: BoardContentProps) => {
   const [items, setItems] = useState([{}]);
 
+  // 글 데이터 가져오는 함수
   const getData = async () => {
     const querySnapshot = await getDocs(collection(db, `${location}`));
 
@@ -21,6 +22,9 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
           // docId: doc.data().docId,
           title: doc.data().title,
           like: doc.data().like,
+          content: doc.data().content,
+          writer: doc.data().writer,
+          writerDetail: doc.data().writerDetail,
         };
       })
     );
@@ -33,14 +37,7 @@ export const BoardContent = ({ location, ...props }: BoardContentProps) => {
   return (
     <BoardContentWrapper>
       {items.map((item: any, num) => {
-        return (
-          <WritingList
-            key={num}
-            like={item.like}
-            title={item.title}
-            // writer={item.docId}
-          ></WritingList>
-        );
+        return <WritingList key={num} item={item}></WritingList>;
       })}
     </BoardContentWrapper>
   );

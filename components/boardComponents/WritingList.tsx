@@ -1,49 +1,71 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { IoMdSnow } from "react-icons/io";
+import { WritingContent } from "./index";
 
 interface WritingListProps {
-  like?: number;
-  title?: string;
-  writer?: string;
+  item?: any;
 }
 
-export const WritingList = ({
-  like,
-  title,
-  writer,
-  ...props
-}: WritingListProps) => {
+export const WritingList = ({ item, ...props }: WritingListProps) => {
   return (
     <ListWrapper>
-      <ListNum>{like}</ListNum>
-      <Title>{title}</Title>
-      <Writer>{writer}</Writer>
+      <ListContainer>
+        <ListLike>
+          <IoMdSnow size="1.5rem" color="#84d6fa" />
+          {item.like}
+        </ListLike>
+        <Title>{item.title}</Title>
+        <Writer>{item.writerDetail}</Writer>
+      </ListContainer>
+      {<WritingContent item={item} />}
     </ListWrapper>
   );
 };
 
 const ListWrapper = styled.div`
-  border: 1px solid lightgray;
-  border-radius: 1vh;
-  display: flex;
-  align-items: center;
-  margin: 2px;
+  width: 100%;
+
+  /* display: flex;
+  align-items: center; */
+
+  /* overflow-x: hidden; */
   padding: 3px;
-  overflow-x: hidden;
 `;
 
-const ListNum = styled.div`
+const ListContainer = styled.div`
+  width: 100%;
+  height: 2.3rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 1vh;
+`;
+
+const ListLike = styled.div`
   font-size: 14px;
-  width: 10%;
+  min-width: 3rem;
   padding-left: 7px;
+  margin-right: 0.5rem;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: gray;
 `;
 
 const Title = styled.div`
   font-size: 17px;
-  width: 70%;
+  /* width: 65%; */
+  flex: 7;
+  overflow: hidden;
 `;
 
 const Writer = styled.div`
-  font-size: 15px;
-  width: 20%;
+  font-size: 0.9rem;
+  min-width: 6rem;
+  padding-right: 0.5rem;
+  flex: 2;
+  color: gray;
+  display: flex;
+  justify-content: flex-end;
 `;
