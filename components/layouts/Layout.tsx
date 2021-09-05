@@ -3,6 +3,7 @@ import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
+  signInWithRedirect,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -28,6 +29,9 @@ export const Layout = ({ children, props }: LayoutProps) => {
   const provider = new GoogleAuthProvider();
 
   const login = () => {
+    signInWithRedirect(auth, provider);
+
+    /*
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
@@ -40,6 +44,7 @@ export const Layout = ({ children, props }: LayoutProps) => {
       .catch((error) => {
         console.log(error);
       });
+      */
   };
 
   const logout = () => {
