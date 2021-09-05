@@ -78,28 +78,28 @@ export const Board = ({ location, ...props }: BoardProps) => {
       if (user) {
         const userId = user.uid;
 
-        const docRef = doc(db, "user", "");
+        const docRef = doc(db, "users", `${userId}`);
+
         const getUserData = await getDoc(docRef);
 
-        // getUserData.forEach(async (doc) => {
-        //   const detail = doc.data().writerDetail;
+        const detail = `${getUserData.data()?.univ} ${
+          getUserData.data()?.major
+        }`;
 
-        //   console.log(userId, detail);
+        await addDoc(collection(db, `${location}`), {
+          title: writingTitle,
+          content: writingContent,
+          like: 0,
+          view: 0,
+          writerDetail: detail,
+        });
 
-        // await addDoc(collection(db, `${location}`), {
-        //   title: writingTitle,
-        //   content: writingContent,
-        //   like: 0,
-        //   view: 0,
-
-        // });
-
-        // router.reload();
-        // });
+        router.reload();
       }
     });
   };
 
+  // 글쓰기 닫기
   const onClickCloseWriting = () => {
     setOpenWrite(false);
     setWritingTitle("");
