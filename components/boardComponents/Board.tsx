@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { BoardContent, Writing } from "./index";
 import router, { useRouter } from "next/router";
 import Link from "next/link";
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 interface BoardProps {
@@ -18,6 +19,8 @@ export const Board = ({ location, ...props }: BoardProps) => {
 
   const router = useRouter();
   const db = getFirestore();
+
+  const auth = getAuth();
 
   // 게시판 타이틀 정하는 함수
   const getTitle = () => {
@@ -51,6 +54,14 @@ export const Board = ({ location, ...props }: BoardProps) => {
     else if (location === "hot") setTitle("온돌");
   };
 
+  // 글쓰기 클릭 함수
+  const onClickOpenWriting = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) setOpenWrite(true);
+      else return alert("로그인을 해주세요!");
+    });
+  };
+
   // 포스팅 창 띄우는 클릭 함수
   const onClickPosting = async () => {
     await addDoc(collection(db, `${location}`), {
@@ -81,7 +92,7 @@ export const Board = ({ location, ...props }: BoardProps) => {
             <></>
           ) : (
             <WritingBtnWrapper>
-              <WritingBtn onClick={() => setOpenWrite(true)}>글쓰기</WritingBtn>
+              <WritingBtn onClick={onClickOpenWriting}>글쓰기</WritingBtn>
             </WritingBtnWrapper>
           )}
         </>

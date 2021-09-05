@@ -16,8 +16,13 @@ export const WritingList = ({ item, ...props }: WritingListProps) => {
           {item.like}
         </ListLike>
         <Title>{item.title}</Title>
-        <Writer>{item.writerDetail}</Writer>
       </ListContainer>
+      <WriterWrapper>
+        <Writer>
+          {item.writerDetail} {item.writer}
+        </Writer>
+      </WriterWrapper>
+
       {/* {<WritingContent item={item} />} */}
     </ListWrapper>
   );
@@ -37,7 +42,6 @@ const ListContainer = styled.div`
   align-items: center;
   /* border: 1px solid lightgray; */
   border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
 
   /* border-radius: 1vh; */
 `;
@@ -47,7 +51,7 @@ const ListLike = styled.div`
   min-width: 3rem;
   padding-left: 7px;
   margin-right: 0.5rem;
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   align-items: center;
   color: gray;
@@ -56,16 +60,27 @@ const ListLike = styled.div`
 const Title = styled.div`
   font-size: 17px;
   /* width: 65%; */
-  flex: 7;
+  /* flex: 9; */
   overflow: hidden;
 `;
 
-const Writer = styled.div`
-  font-size: 0.9rem;
-  min-width: 6rem;
-  padding-right: 0.5rem;
-  flex: 2;
-  color: gray;
+const WriterWrapper = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
+  height: 1.8rem;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  padding-left: 1rem;
+`;
+
+const Writer = styled.div`
+  font-size: 0.8rem;
+  min-width: 6rem;
+  /* padding-right: 0.5rem; */
+  /* flex: 2; */
+  color: gray;
+
+  /* display: flex;
+  justify-content: flex-end; */
 `;

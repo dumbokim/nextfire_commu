@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  getAuth,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Head from "next/dist/shared/lib/head";
 import { IoMdSnow } from "react-icons/io";
 
 import { NavBtn } from "./index";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   children?: any;
@@ -12,6 +20,51 @@ interface LayoutProps {
 }
 
 export const Layout = ({ children, props }: LayoutProps) => {
+  const [user, setUser] = useState("");
+
+  const router = useRouter();
+
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  const login = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential?.accessToken;
+        // const user = result.user;
+        // router.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        // router.reload();
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user.uid);
+        console.log(user.uid);
+      } else setUser("");
+    });
+
+    console.log("refreshed");
+  }, [user]);
+
   return (
     <LayoutWrapper>
       <Head>
@@ -32,6 +85,14 @@ export const Layout = ({ children, props }: LayoutProps) => {
         <NavBtn href="/promotion">홍보</NavBtn>
       </Navbar>
       <ContentWrapper>{children}</ContentWrapper>
+      <BottomWrapper>
+        {user === "" ? (
+          <LoginBtn onClick={login}>로그인</LoginBtn>
+        ) : (
+          <LoginBtn onClick={logout}>로그아웃</LoginBtn>
+        )}
+        <Text>made by dumbokim</Text>
+      </BottomWrapper>
     </LayoutWrapper>
   );
 };
@@ -45,12 +106,14 @@ const LayoutWrapper = styled.div`
 const Navbar = styled.div`
   width: 100%;
   display: flex;
-  padding: 0.5rem 0;
-  margin: 0.5rem 0;
+  padding: 0.7rem 0;
+  /* margin: 0.5rem 0; */
   justify-content: space-around;
   align-items: center;
   border-bottom: 1px solid lightgray;
   background-color: white;
+  position: sticky;
+  top: 0;
 `;
 
 const HomeBtn = styled.div`
@@ -72,4 +135,21 @@ const HomeBtn = styled.div`
 const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
+`;
+
+const BottomWrapper = styled.div`
+  width: 100%;
+  height: 3.5rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const LoginBtn = styled.button``;
+
+const Text = styled.div`
+  font-size: 0.7rem;
+  color: gray;
 `;
