@@ -26,28 +26,14 @@ export const Layout = ({ children, props }: LayoutProps) => {
   const router = useRouter();
 
   const auth = getAuth();
-  const provider = new GoogleAuthProvider();
 
   const login = () => {
-    signInWithRedirect(auth, provider);
-
-    /*
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        console.log(result);
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential?.accessToken;
-        // const user = result.user;
-        // router.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-      */
+    router.push("/login");
   };
 
-  const logout = () => {
+  const logout = (e: any) => {
+    e.preventDefault();
+
     signOut(auth)
       .then(() => {
         // Sign-out successful.
